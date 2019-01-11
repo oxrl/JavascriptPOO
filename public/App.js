@@ -1,6 +1,7 @@
 import Product from './Models/Product.js';
 import UI from './UI/UI.js';
 
+
 // DOM Events
 document.getElementById('product-form')
     .addEventListener('submit', function (e) {
@@ -21,6 +22,7 @@ document.getElementById('product-form')
         }
 
         // Save Product
+        product.saveProduct();
         ui.addProduct(product);
         ui.showMessage('Product Added Successfully', 'success');
         ui.resetForm();
@@ -34,3 +36,4 @@ document.getElementById('product-list')
         ui.deleteProduct(e.target);
         e.preventDefault();
     });
+

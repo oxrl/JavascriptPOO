@@ -19,6 +19,7 @@
   "homepage": "https://github.com/oxrl/JavascriptPOO#readme",
   "dependencies": {
     "express": "^4.16.4",
+    "firebase": "^5.5.5",
     "http": "0.0.0",
     "http-server": "^0.11.1",
     "morgan": "^1.9.1"
