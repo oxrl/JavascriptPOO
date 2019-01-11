@@ -1,41 +1,41 @@
-// Initialize Firebase
-
-
+import db from '../Firebase/Config.js';
 
 class Product {
-
 
     constructor(name, price, year) {
         this.name = name;
         this.price = price;
         this.year = year;
-        this.config = {
-            apiKey: "AIzaSyCAeNQm8V6lOkWAKhZBHEiLPfQ-4_OIb0U",
-            authDomain: "appproduct-be53f.firebaseapp.com",
-            databaseURL: "https://appproduct-be53f.firebaseio.com",
-            projectId: "appproduct-be53f",
-            storageBucket: "appproduct-be53f.appspot.com",
-            messagingSenderId: "755003102096"
-        };
-        firebase.initializeApp(this.config);
-        this.db = firebase.firestore();
-        // Disable deprecated features
-        this.db.settings({
-            timestampsInSnapshots: true
-        });
+        this.result = [];
+
     }
     saveProduct(){
-        this.db.collection("products").add({
-            first: this.name,
-            last: this.price,
-            born: this.year
+
+       return db.collection("products").add({
+            name: this.name,
+            price: this.price,
+            year: this.year
         })
             .then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
+
             })
             .catch(function(error) {
                 console.error("Error adding document: ", error);
             });
+    }
+    getProducts(){
+
+      db.collection("products").get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                console.log(`${doc.id} => ${doc.data()}`);
+                console.log(doc.data().name);
+
+                //this.result[doc.id] = { "name" : doc.data().name , "price" : doc.data().price } ;
+                this.result.push({ "name" : doc.data().name , "price" : doc.data().price });
+            });
+        });
+        return this.result;
     }
 }
 

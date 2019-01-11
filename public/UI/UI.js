@@ -1,18 +1,24 @@
 // UI Constructor
 class UI {
-    addProduct(product) {
+    showProduct(products) {
+        console.log(products.name);
         const productList = document.getElementById('product-list');
         const element = document.createElement('div');
+      /*  for (var i = 0; i < products.length; i+=1) {
+            console.log("En el índice '" + i + "' hay este valor: " + miArray[i]);
+        }*/
+
+/*
         element.innerHTML = `
             <div class="card text-center mb-4">
                 <div class="card-body">
-                    <strong>Product</strong>: ${product.name} -
-                    <strong>Price</strong>: ${product.price} - 
-                    <strong>Year</strong>: ${product.year}
+                    <strong>Product</strong>: ${products.name} -
+                    <strong>Price</strong>: ${products.price} - 
+                    <strong>Year</strong>: ${products.year}
                     <a href="#" class="btn btn-danger" name="delete">Delete</a>
                 </div>
             </div>
-        `;
+        `;*/
         productList.appendChild(element);
     }
 

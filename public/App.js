@@ -5,7 +5,7 @@ import UI from './UI/UI.js';
 // DOM Events
 document.getElementById('product-form')
     .addEventListener('submit', function (e) {
-
+        e.preventDefault();
         const name = document.getElementById('name').value,
             price = document.getElementById('price').value,
             year = document.getElementById('year').value;
@@ -23,11 +23,12 @@ document.getElementById('product-form')
 
         // Save Product
         product.saveProduct();
-        ui.addProduct(product);
+        this.result =product.getProducts();
+
+        ui.showProduct(this.result);
         ui.showMessage('Product Added Successfully', 'success');
         ui.resetForm();
 
-        e.preventDefault();
     });
 
 document.getElementById('product-list')
