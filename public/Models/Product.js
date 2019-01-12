@@ -9,6 +9,7 @@ class Product {
         this.result = [];
 
     }
+
     saveProduct(){
 
        return db.collection("products").add({
@@ -26,16 +27,34 @@ class Product {
     }
     getProducts(){
 
-      db.collection("products").get().then((querySnapshot) => {
+      db.collection("products").orderBy("name", "desc").get().then((querySnapshot) => {
+            document.getElementById('product-list').innerHTML=``;
             querySnapshot.forEach((doc) => {
-                console.log(`${doc.id} => ${doc.data()}`);
-                console.log(doc.data().name);
-
-                //this.result[doc.id] = { "name" : doc.data().name , "price" : doc.data().price } ;
-                this.result.push({ "name" : doc.data().name , "price" : doc.data().price });
+               // console.log(`${doc.id} => ${doc.data()}`);
+              //  console.log(doc.data().name);
+                const productList = document.getElementById('product-list');
+                const element = document.createElement('div');
+                element.innerHTML = `
+                        <div class="card text-center mb-4">
+                            <div class="card-body">        
+                                <strong>Product</strong>: ${doc.data().name} -
+                                <strong>Price</strong>: ${doc.data().price} - 
+                                <strong>Year</strong>: ${doc.data().year}
+                                <a href="#" data-id=${doc.id} class="btn btn-danger" name="delete">Delete</a>
+                            </div>
+                        </div>
+                    `;
+                productList.appendChild(element);
             });
         });
         return this.result;
+    }
+    deleteProductDB(Doc){
+        db.collection("products").doc(Doc).delete().then(function() {
+            console.log("Document successfully deleted!");
+        }).catch(function(error) {
+            console.error("Error removing document: ", error);
+        });
     }
 }
 

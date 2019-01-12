@@ -2,13 +2,11 @@
 
 # dependencies
 /node_modules
-/Firebase
+public/Firebase/
 # IDEs and editors
-/.idea
 .project
 .classpath
 .c9/
 .settings/
-
-
-
+.gitignore
+.idea/

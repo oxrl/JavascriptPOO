@@ -1,7 +1,9 @@
 import Product from './Models/Product.js';
 import UI from './UI/UI.js';
-
-
+// Create a new UI
+const ui = new UI();
+//Show Products
+ui.showProduct();
 // DOM Events
 document.getElementById('product-form')
     .addEventListener('submit', function (e) {
@@ -9,23 +11,15 @@ document.getElementById('product-form')
         const name = document.getElementById('name').value,
             price = document.getElementById('price').value,
             year = document.getElementById('year').value;
-        //Product(name,price,year);
-        // Create a new Oject Product
-        const product = new Product(name, price, year);
-
-        // Create a new UI
-        const ui = new UI();
-
         // Input User Validation
         if (name === '' || price === '' || year === '') {
             ui.showMessage('Please Insert data in all fields', 'danger');
         }
 
         // Save Product
+        const product = new Product(name, price, year);
         product.saveProduct();
-        this.result =product.getProducts();
-
-        ui.showProduct(this.result);
+        ui.showProduct();
         ui.showMessage('Product Added Successfully', 'success');
         ui.resetForm();
 
@@ -33,8 +27,8 @@ document.getElementById('product-form')
 
 document.getElementById('product-list')
     .addEventListener('click', function (e) {
-        const ui = new UI();
         ui.deleteProduct(e.target);
+        ui.showProduct();
         e.preventDefault();
     });
 
