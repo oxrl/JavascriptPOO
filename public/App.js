@@ -27,7 +27,12 @@ document.getElementById('product-form')
 
 document.getElementById('product-list')
     .addEventListener('click', function (e) {
-        ui.deleteProduct(e.target);
+        if (element.name === 'delete') {
+            ui.deleteProduct(e.target);
+        }
+        if (element.name === 'edit') {
+            ui.editProduct(e.target);
+        }
         ui.showProduct();
         e.preventDefault();
     });

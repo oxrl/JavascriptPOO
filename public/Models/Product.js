@@ -41,6 +41,7 @@ class Product {
                                 <strong>Price</strong>: ${doc.data().price} - 
                                 <strong>Year</strong>: ${doc.data().year}
                                 <a href="#" data-id=${doc.id} class="btn btn-danger" name="delete">Delete</a>
+                                <a href="#" data-id=${doc.id} class="btn btn-success" name="edit">Edit</a>
                             </div>
                         </div>
                     `;
@@ -49,6 +50,15 @@ class Product {
         });
         return this.result;
     }
+    editProductDB(Doc){
+        db.collection("products").doc(Doc).set({
+
+        }).then(function() {
+            console.log("Document successfully deleted!");
+        }).catch(function(error) {
+            console.error("Error removing document: ", error);
+        });
+    }
     deleteProductDB(Doc){
         db.collection("products").doc(Doc).delete().then(function() {
             console.log("Document successfully deleted!");
@@ -56,6 +66,7 @@ class Product {
             console.error("Error removing document: ", error);
         });
     }
+
 }
 
 export default Product;

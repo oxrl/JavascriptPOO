@@ -8,15 +8,20 @@ class UI extends Product {
         document.getElementById('product-form').reset();
     }
 
+    editProduct(element) {
+
+        this.Doc = document.getElementsByName(element.name)[0].getAttribute("data-id");
+        this.editProductDB(this.Doc);
+        this.showMessage('Product Deleted Successsfully', 'success');
+
+    }
+
     deleteProduct(element) {
 
-        if (element.name === 'delete') {
-           // console.log(element.name);
             this.Doc = document.getElementsByName(element.name)[0].getAttribute("data-id");
-          //  console.log(this.Doc);
             this.deleteProductDB(this.Doc);
-            this.showMessage('Product Deleted Succsssfully', 'success');
-        }
+            this.showMessage('Product Deleted Successsfully', 'success');
+
     }
 
     showMessage(message, cssClass) {
