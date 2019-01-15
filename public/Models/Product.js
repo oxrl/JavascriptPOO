@@ -25,6 +25,26 @@ class Product {
                 console.error("Error adding document: ", error);
             });
     }
+    getProduct(Doc){
+        db.collection("products").doc(Doc).get().then((doc)=>{
+            if (!doc.exists) {
+                console.log('No such document!');
+            } else {
+                console.log('Document data:', doc.id);
+                document.getElementById('name').value = doc.data().name;
+                document.getElementById('price').value = doc.data().price;
+                document.getElementById('year').value = doc.data().year;
+
+                document.getElementById("btnSave").setAttribute("id",Doc);
+                document.getElementById(Doc).setAttribute("name","Update");
+                document.getElementById(Doc).value = "Guardar";
+
+            }
+        }).catch(function(error){
+            console.error("Error obtener document: ", error);
+        });
+
+    }
     getProducts(){
 
       db.collection("products").orderBy("name", "desc").get().then((querySnapshot) => {
@@ -40,8 +60,8 @@ class Product {
                                 <strong>Product</strong>: ${doc.data().name} -
                                 <strong>Price</strong>: ${doc.data().price} - 
                                 <strong>Year</strong>: ${doc.data().year}
-                                <a href="#" data-id=${doc.id} class="btn btn-danger" name="delete">Delete</a>
-                                <a href="#" data-id=${doc.id} class="btn btn-success" name="edit">Edit</a>
+                                <a href="#" id=${doc.id} class="btn btn-danger" name="delete">Delete</a>
+                                <a href="#" id=${doc.id} class="btn btn-success" name="edit">Edit</a>
                             </div>
                         </div>
                     `;
@@ -51,12 +71,14 @@ class Product {
         return this.result;
     }
     editProductDB(Doc){
-        db.collection("products").doc(Doc).set({
-
+        console.log('entro3');
+        db.collection("products").doc(Doc).update({
+          name : 'Hola222', price : '100442', year : '2010'
         }).then(function() {
-            console.log("Document successfully deleted!");
+            console.log('entro4');
+            console.log("Document successfully Editing!");
         }).catch(function(error) {
-            console.error("Error removing document: ", error);
+            console.error("Error Editing document: ", error);
         });
     }
     deleteProductDB(Doc){

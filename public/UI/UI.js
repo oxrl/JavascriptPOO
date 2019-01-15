@@ -1,27 +1,29 @@
 // UI Constructor
 import Product from '../Models/Product.js';
 class UI extends Product {
-    showProduct(){
+    showProducts(){
         this.getProducts();
+    }
+    showProduct(id){
+        this.Doc = id;
+        this.getProduct(this.Doc);
     }
     resetForm() {
         document.getElementById('product-form').reset();
     }
 
     editProduct(element) {
-
+        console.log('DOC: ',document.getElementsByName(element.name)[0].getAttribute("data-id"));
         this.Doc = document.getElementsByName(element.name)[0].getAttribute("data-id");
         this.editProductDB(this.Doc);
-        this.showMessage('Product Deleted Successsfully', 'success');
+        this.showMessage('Product Edited Successsfully', 'success');
 
     }
 
-    deleteProduct(element) {
-
-            this.Doc = document.getElementsByName(element.name)[0].getAttribute("data-id");
+    deleteProduct(id) {
+            this.Doc = id;
             this.deleteProductDB(this.Doc);
             this.showMessage('Product Deleted Successsfully', 'success');
-
     }
 
     showMessage(message, cssClass) {
