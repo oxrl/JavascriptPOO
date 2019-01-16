@@ -13,13 +13,15 @@ class UI extends Product {
     }
 
     editProduct(element) {
-        console.log('DOC: ',document.getElementsByName(element.name)[0].getAttribute("data-id"));
+        //console.log('DOC: ',document.getElementsByName(element.name)[0].getAttribute("data-id"));
         this.Doc = document.getElementsByName(element.name)[0].getAttribute("data-id");
         this.editProductDB(this.Doc);
         this.showMessage('Product Edited Successsfully', 'success');
-
     }
-
+    updateProduct(id){
+        this.Doc = id;
+        this.updateProductDB(this.Doc);
+    }
     deleteProduct(id) {
             this.Doc = id;
             this.deleteProductDB(this.Doc);

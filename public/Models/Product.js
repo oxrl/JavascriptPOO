@@ -36,7 +36,7 @@ class Product {
                 document.getElementById('year').value = doc.data().year;
 
                 document.getElementById("btnSave").setAttribute("id",Doc);
-                document.getElementById(Doc).setAttribute("name","Update");
+                document.getElementById(Doc).setAttribute("name","btnUpdate");
                 document.getElementById(Doc).value = "Guardar";
 
             }
@@ -70,16 +70,18 @@ class Product {
         });
         return this.result;
     }
-    editProductDB(Doc){
-        console.log('entro3');
+    updateProductDB(Doc){
         db.collection("products").doc(Doc).update({
-          name : 'Hola222', price : '100442', year : '2010'
+          name : document.getElementById('name').value, price : document.getElementById('price').value, year : document.getElementById('year').value
         }).then(function() {
-            console.log('entro4');
             console.log("Document successfully Editing!");
         }).catch(function(error) {
             console.error("Error Editing document: ", error);
         });
+        document.getElementsByName("btnUpdate")[0].id = "btnSave";
+        document.getElementById("btnSave").value = "Agregar";
+        document.getElementById("btnSave").setAttribute("name","");
+       // document.getElementById("TituloEditar").innerText = "Agregar Persona";
     }
     deleteProductDB(Doc){
         db.collection("products").doc(Doc).delete().then(function() {

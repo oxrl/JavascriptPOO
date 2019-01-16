@@ -33,7 +33,9 @@ document.addEventListener('click', function (e) {
             ui.showProducts();
         }
         if(e.target.name === 'btnUpdate'){
-
+            ui.updateProduct(e.target.id);
+            ui.showProducts();
+            ui.resetForm();
         }
 
     });
